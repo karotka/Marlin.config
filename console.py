@@ -152,8 +152,8 @@ if __name__ == '__main__':
     atexit.register(readline.write_history_file, historyFile)
 
     ser = serial.Serial(
-        port=port,
-        baudrate=115200,
+        port = port,
+        baudrate = 250000,
     )
     if ser.isOpen():
         ser.close()
