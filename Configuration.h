@@ -111,7 +111,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200
+#define BAUDRATE 250000
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -542,7 +542,8 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 160, 160, 5, 25 }
+//#define DEFAULT_MAX_FEEDRATE          { 160, 160, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 3000, 2000, 10, 25 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -550,7 +551,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 600, 600, 50, 500 }
+#define DEFAULT_MAX_ACCELERATION      { 5000, 3000, 100, 500 }
 //#define DEFAULT_MAX_ACCELERATION      { 400, 400, 50, 500 }
 
 /**
@@ -692,10 +693,10 @@
  */
 #define X_PROBE_OFFSET_FROM_EXTRUDER -21  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER -40  // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -3   // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 8000
+#define XY_PROBE_SPEED 10000
 
 // Speed for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
@@ -775,7 +776,7 @@
 
 //#define NO_MOTION_BEFORE_HOMING  // Inhibit movement until all axes have been homed
 
-//#define Z_HOMING_HEIGHT 4  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT 10  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
                              // Be sure you have this distance over your Z_MAX_POS in case.
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
@@ -793,7 +794,7 @@
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS -23
 #define Y_MIN_POS -10
-#define Z_MIN_POS 0
+#define Z_MIN_POS -2 // mytest
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 195
@@ -1048,8 +1049,8 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (10*60)
+#define HOMING_FEEDRATE_XY 8000
+#define HOMING_FEEDRATE_Z  8000
 
 // @section calibrate
 
@@ -1134,7 +1135,7 @@
 //
 //#define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
 //#define DEFAULT_KEEPALIVE_INTERVAL 2  // Number of seconds between "busy" messages. Set with M113.
-#define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
+//#define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
 
 //
 // M100 Free Memory Watcher

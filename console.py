@@ -8,6 +8,7 @@ import thread
 import time
 import readline
 import atexit
+from time import sleep
 
 commands = []
 def mainLoop(threadName, delay):
@@ -22,6 +23,9 @@ def mainLoop(threadName, delay):
         if out != '':
             print ("->%s" % out, end = '')
 
+def gSend(g):
+    ser.write("%s\n" % g)
+    print ("<-%s" % g)
 
 class MarlinConsole(cmd.Cmd):
     prompt = ""
@@ -57,6 +61,16 @@ class MarlinConsole(cmd.Cmd):
             line = "G1 X20 Y20"
             ser.write("%s\n" % line)
             print ("<-%s" % line)
+
+    def do_test2(self, *args):
+        gSend("G1 F8000")
+
+        for i in range(0, 10):
+            gSend("G1 X0 Y0")
+            gSend("G1 X20 Y0")
+            gSend("G1 X20 Y20")
+            gSend("G1 X0 Y20")
+            sleep(1)
 
     def do_pos(self, *args):
         """It sending M114 to Marlin and except position information
